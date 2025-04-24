@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:telefaune/screens/add_observation_screen.dart';
 import 'package:telefaune/screens/auth_wrapper.dart';
 import 'package:telefaune/screens/home_screen.dart';
+import 'package:telefaune/screens/observation_list_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,7 @@ class TelefauneApp extends StatelessWidget {
         '/': (context) => const AuthWrapper(),
         '/home': (context) => const HomeScreen(),
         '/add': (context) => const AddObservationScreen(),
+        '/list': (context) => const ObservationListScreen(),
       },
     );
   }

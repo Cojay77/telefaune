@@ -27,6 +27,13 @@ class HomeScreen extends StatelessWidget {
               icon: const Icon(Icons.add_location_alt),
               label: const Text("Nouvelle observation"),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/list'),
+              child: const Text("Voir mes observations"),
             )
           ],
         ),

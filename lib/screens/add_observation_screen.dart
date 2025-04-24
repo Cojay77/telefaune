@@ -26,7 +26,7 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
 
-    await FirebaseFirestore.instance.collection('observations').add({
+    await FirebaseFirestore.instance.collection('Observations').add({
       'espece': especeController.text.trim(),
       'notes': notesController.text.trim(),
       'photoUrl': _photoUrl ?? '',
@@ -46,7 +46,7 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
     if (pickedFile != null) {
       final fileName = "${DateTime.now().millisecondsSinceEpoch}.jpg";
       final storageRef =
-          FirebaseStorage.instance.ref().child("observations/$fileName");
+          FirebaseStorage.instance.ref().child("Observations/$fileName");
       await storageRef.putData(await pickedFile.readAsBytes());
       final url = await storageRef.getDownloadURL();
       setState(() {
