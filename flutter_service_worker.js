@@ -19,8 +19,8 @@ const RESOURCES = {"assets/AssetManifest.json": "af236ac12b2f46aec036331dff11b99
 "canvaskit/canvaskit.js": "5caccb235fad20e9b72ea6da5a0094e6",
 "canvaskit/canvaskit.wasm": "d9f69e0f428f695dc3d66b3a83a4aa8e",
 "canvaskit/skwasm.worker.js": "51253d3321b11ddb8d73fa8aa87d3b15",
-"index.html": "ae7d8cb4fc49ed7af3db6ed48448f6e3",
-"/": "ae7d8cb4fc49ed7af3db6ed48448f6e3",
+"index.html": "56f98a141d49666d06af2a11d3f249a8",
+"/": "56f98a141d49666d06af2a11d3f249a8",
 "main.dart.js": "9551572bfd8472791434e85e8fbd74a1"};
 // The application shell files that are downloaded before a service worker can
 // start.
