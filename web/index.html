@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Téléfaune Flutter Web">
+
+  <title>Téléfaune</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+  <!-- Firebase SDK compat -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCYu-H7VWMWizZQgh1NujXVqySpaOFxIbw",
+      authDomain: "telefaune-f3516.firebaseapp.com",
+      projectId: "telefaune-f3516",
+      storageBucket: "telefaune-f3516.firebasestorage.app",
+      messagingSenderId: "502701430063",
+      appId: "1:502701430063:web:18324ab3de5467dd883dda",
+      measurementId: "G-MGNYNJ3G4V"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+
+</html>
