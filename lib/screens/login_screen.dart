@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                "Bienvenue dans Téléfaune 🦎",
+                "Téléfaune 🦎",
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

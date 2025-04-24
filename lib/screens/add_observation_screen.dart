@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:geolocator/geolocator.dart';
 
 class AddObservationScreen extends StatefulWidget {
   const AddObservationScreen({super.key});
@@ -18,6 +19,8 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
   String? confirmation;
   XFile? _imageFile;
   String? _photoUrl;
+  double? _latitude;
+  double? _longitude;
 
   Future<void> saveObservation() async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -51,6 +54,26 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
         _photoUrl = url;
       });
     }
+  }
+
+  Future<void> getCurrentLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return;
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.deniedForever) return;
+    }
+
+    final position = await Geolocator.getCurrentPosition();
+    setState(() {
+      _latitude = position.latitude;
+      _longitude = position.longitude;
+    });
   }
 
   @override
@@ -97,6 +120,20 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
                   child: Image.network(_imageFile!.path, height: 200),
                 ),
               const SizedBox(height: 20),
+              ElevatedButton.icon(
+                onPressed: getCurrentLocation,
+                icon: const Icon(Icons.location_on),
+                label: const Text("Obtenir ma localisation"),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
+              ),
+              if (_latitude != null && _longitude != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text("📍 Lat: $_latitude, Lon: $_longitude"),
+                ),
+              const SizedBox(
+                height: 20,
+              ),
               ElevatedButton.icon(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) saveObservation();
