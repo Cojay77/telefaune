@@ -76,8 +76,9 @@ class ObservationDetailScreen extends StatelessWidget {
                       height: 220,
                       child: FlutterMap(
                         options: MapOptions(
-                          center: LatLng(data['latitude'], data['longitude']),
-                          zoom: 14.5,
+                          initialCenter:
+                              LatLng(data['latitude'], data['longitude']),
+                          initialZoom: 14.5,
                           interactiveFlags: InteractiveFlag.all,
                         ),
                         children: [
