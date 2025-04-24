@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddObservationScreen extends StatefulWidget {
   const AddObservationScreen({super.key});
@@ -14,6 +16,8 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
   final especeController = TextEditingController();
   final notesController = TextEditingController();
   String? confirmation;
+  XFile? _imageFile;
+  String? _photoUrl;
 
   Future<void> saveObservation() async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -22,6 +26,7 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
     await FirebaseFirestore.instance.collection('observations').add({
       'espece': especeController.text.trim(),
       'notes': notesController.text.trim(),
+      'photoUrl': _photoUrl ?? '',
       'utilisateurId': uid,
       'date': DateTime.now(),
     });
@@ -29,6 +34,23 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
     setState(() => confirmation = "Observation enregistrée ✅");
     especeController.clear();
     notesController.clear();
+  }
+
+  ImagePicker _picker = ImagePicker();
+
+  Future<void> pickAndUploadPhoto() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      final fileName = "${DateTime.now().millisecondsSinceEpoch}.jpg";
+      final storageRef =
+          FirebaseStorage.instance.ref().child("observations/$fileName");
+      await storageRef.putData(await pickedFile.readAsBytes());
+      final url = await storageRef.getDownloadURL();
+      setState(() {
+        _imageFile = pickedFile;
+        _photoUrl = url;
+      });
+    }
   }
 
   @override
@@ -60,6 +82,20 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
                 decoration: const InputDecoration(
                     labelText: 'Notes', border: OutlineInputBorder()),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton.icon(
+                onPressed: pickAndUploadPhoto,
+                icon: const Icon(Icons.photo_camera),
+                label: const Text("Prendre une photo"),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+              ),
+              if (_imageFile != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Image.network(_imageFile!.path, height: 200),
+                ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
