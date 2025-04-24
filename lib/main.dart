@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:telefaune/screens/add_observation_screen.dart';
+import 'package:telefaune/screens/auth_wrapper.dart';
+import 'package:telefaune/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,18 +35,12 @@ class TelefauneApp extends StatelessWidget {
           bodyMedium: TextStyle(fontFamily: 'Verdana', fontSize: 16),
         ),
       ),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasData) {
-            return const HomePage();
-          }
-          return const LoginPage();
-        },
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const AuthWrapper(),
+        '/home': (context) => const HomeScreen(),
+        '/add': (context) => const AddObservationScreen(),
+      },
     );
   }
 }

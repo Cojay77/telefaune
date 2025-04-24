@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:telefaune/screens/add_observation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,11 +23,7 @@ class HomeScreen extends StatelessWidget {
             const Text("Bienvenue dans Téléfaune 🦎"),
             const SizedBox(height: 20),
             ElevatedButton.icon(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const AddObservationScreen()),
-              ),
+              onPressed: () => Navigator.pushNamed(context, '/add'),
               icon: const Icon(Icons.add_location_alt),
               label: const Text("Nouvelle observation"),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
