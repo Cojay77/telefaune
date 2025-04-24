@@ -32,6 +32,8 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
       'photoUrl': _photoUrl ?? '',
       'utilisateurId': uid,
       'date': DateTime.now(),
+      'latitude': _latitude,
+      'longitude': _longitude
     });
 
     setState(() => confirmation = "Observation enregistrée ✅");
