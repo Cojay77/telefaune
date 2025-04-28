@@ -21,7 +21,7 @@ const RESOURCES = {"assets/AssetManifest.json": "af236ac12b2f46aec036331dff11b99
 "canvaskit/skwasm.worker.js": "51253d3321b11ddb8d73fa8aa87d3b15",
 "index.html": "b099d6544c43a0a312cc99eff171e021",
 "/": "b099d6544c43a0a312cc99eff171e021",
-"main.dart.js": "9551572bfd8472791434e85e8fbd74a1"};
+"main.dart.js": "9820d29abe3dfadf8b29dedc2fa4df6d"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
