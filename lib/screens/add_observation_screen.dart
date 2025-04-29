@@ -17,6 +17,7 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
   final especeController = TextEditingController();
   final notesController = TextEditingController();
   String? confirmation;
+  String? _categorie;
   XFile? _imageFile;
   String? _photoUrl;
   double? _latitude;
@@ -28,6 +29,7 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
 
     await FirebaseFirestore.instance.collection('observations').add({
       'espece': especeController.text.trim(),
+      'categorie': _categorie,
       'notes': notesController.text.trim(),
       'photoUrl': _photoUrl ?? '',
       'utilisateurId': uid,
@@ -96,6 +98,32 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
                 controller: especeController,
                 decoration: const InputDecoration(
                     labelText: 'Nom de l’animal', border: OutlineInputBorder()),
+                validator: (value) => value == null || value.isEmpty
+                    ? 'Ce champ est requis'
+                    : null,
+              ),
+              const SizedBox(height: 12),
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(labelText: "Catégorie"),
+                items: [
+                  'amphibien',
+                  'reptile',
+                  'oiseau',
+                  'mammifère',
+                  'insecte',
+                  'tortue',
+                  'autre',
+                ]
+                    .map((cat) => DropdownMenuItem(
+                          value: cat,
+                          child: Text(cat[0].toUpperCase() + cat.substring(1)),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _categorie = value;
+                  });
+                },
                 validator: (value) => value == null || value.isEmpty
                     ? 'Ce champ est requis'
                     : null,

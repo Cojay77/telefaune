@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:telefaune/utils/interface_utils.dart';
 
 class GlobalMapScreen extends StatefulWidget {
   const GlobalMapScreen({super.key});
@@ -28,6 +29,7 @@ class _GlobalMapScreenState extends State<GlobalMapScreen> {
           final data = doc.data();
           final lat = data['latitude'];
           final lon = data['longitude'];
+          final categorie = data['categorie'];
           final espece = data['espece'] ?? "Espèce inconnue";
 
           if (lat != null && lon != null) {
@@ -37,10 +39,12 @@ class _GlobalMapScreenState extends State<GlobalMapScreen> {
               point: LatLng(lat, lon),
               child: Tooltip(
                 message: espece,
-                child: const Icon(
-                  Icons.location_on,
-                  size: 40,
-                  color: Colors.redAccent,
+                child: Tooltip(
+                  message: espece,
+                  child: Text(
+                    emojiForCategorie(categorie),
+                    style: const TextStyle(fontSize: 28),
+                  ),
                 ),
               ),
             );
@@ -62,8 +66,9 @@ class _GlobalMapScreenState extends State<GlobalMapScreen> {
       appBar: AppBar(title: const Text('Carte des observations')),
       body: FlutterMap(
         options: MapOptions(
-          center: LatLng(46.6034, 1.8883), // Centre France 🇫🇷 par défaut
-          zoom: 5.5,
+          initialCenter:
+              LatLng(46.6034, 1.8883), // Centre France 🇫🇷 par défaut
+          initialZoom: 5.5,
           interactiveFlags: InteractiveFlag.all,
         ),
         children: [
