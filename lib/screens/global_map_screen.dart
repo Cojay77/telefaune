@@ -65,7 +65,7 @@ class _GlobalMapScreenState extends State<GlobalMapScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Carte des observations')),
       body: FlutterMap(
-        options: MapOptions(
+        options: const MapOptions(
           initialCenter:
               LatLng(46.6034, 1.8883), // Centre France 🇫🇷 par défaut
           initialZoom: 5.5,

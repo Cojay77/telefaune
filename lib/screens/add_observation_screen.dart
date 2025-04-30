@@ -43,7 +43,7 @@ class _AddObservationScreenState extends State<AddObservationScreen> {
     notesController.clear();
   }
 
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
 
   Future<void> pickAndUploadPhoto() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
