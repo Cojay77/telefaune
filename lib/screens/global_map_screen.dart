@@ -69,7 +69,6 @@ class _GlobalMapScreenState extends State<GlobalMapScreen> {
           initialCenter:
               LatLng(46.6034, 1.8883), // Centre France 🇫🇷 par défaut
           initialZoom: 5.5,
-          interactiveFlags: InteractiveFlag.all,
         ),
         children: [
           TileLayer(

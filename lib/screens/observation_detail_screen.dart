@@ -79,7 +79,6 @@ class ObservationDetailScreen extends StatelessWidget {
                           initialCenter:
                               LatLng(data['latitude'], data['longitude']),
                           initialZoom: 14.5,
-                          interactiveFlags: InteractiveFlag.all,
                         ),
                         children: [
                           TileLayer(
