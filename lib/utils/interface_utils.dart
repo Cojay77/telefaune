@@ -12,6 +12,8 @@ String emojiForCategorie(String categorie) {
       return '🐞';
     case 'tortue':
       return '🐢';
+    case '':
+      return '🐾';
     default:
       return '🐾';
   }

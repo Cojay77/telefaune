@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:telefaune/screens/observation_detail_screen.dart';
+import 'package:telefaune/utils/interface_utils.dart';
 
 class ObservationListScreen extends StatelessWidget {
   const ObservationListScreen({super.key});
@@ -80,21 +81,32 @@ class ObservationListScreen extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              child: Row(
                                 children: [
-                                  Text(
-                                    obs['espece'] ?? 'Espèce inconnue',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        obs['espece'] ?? 'Espèce inconnue',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      if (date != null)
+                                        Text(
+                                          "📅 ${date.day}/${date.month}/${date.year}",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                    ],
                                   ),
-                                  if (date != null)
-                                    Text(
-                                      "📅 ${date.day}/${date.month}/${date.year}",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(emojiForCategorie(obs['categorie']))
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
