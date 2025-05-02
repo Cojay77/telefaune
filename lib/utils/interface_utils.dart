@@ -1,5 +1,6 @@
-String emojiForCategorie(String categorie) {
-  switch (categorie.toLowerCase()) {
+String emojiForCategorie(String? categorie) {
+  final value = (categorie ?? '').toLowerCase();
+  switch (value) {
     case 'amphibien':
       return '🐸';
     case 'reptile':
@@ -12,8 +13,6 @@ String emojiForCategorie(String categorie) {
       return '🐞';
     case 'tortue':
       return '🐢';
-    case '':
-      return '🐾';
     default:
       return '🐾';
   }
